@@ -20,4 +20,6 @@ composer install
 
 Importer la base de données en utilisant le fichier SQL `blog.sql` situé dans le dossier `database`.
 
+Modifier les valeurs de connexion dans le fichier `connexion.php` si nécessaire.
+
 Lancer l'enregistrement des fixtures en lançant depuis le navigateur le fichier `fixtures.php`.
