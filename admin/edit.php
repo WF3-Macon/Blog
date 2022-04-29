@@ -26,6 +26,35 @@ $content = $article['content'];
 $category = $article['category_id'];
 $error = null;
 
+/**
+ * Si la superglobale $_POST n'est pas vide, c'est que le formulaire
+ * vient d'être soumis
+ */
+if (!empty($_POST)) {
+    // Nettoyage des données
+    $title = htmlspecialchars(strip_tags($_POST['title']));
+    $content = htmlspecialchars(strip_tags($_POST['content']));
+    $category = htmlspecialchars(strip_tags($_POST['category']));
+
+    // Vérifie que mes champs soient bien remplis
+    if (!empty($title) && !empty($content) && !empty($category)) {
+
+        // Est-ce que je reçois une image ?
+        if (!empty($_FILES['cover']) && $_FILES['cover']['error'] === 0) {
+            // Suppression de l'ancienne image
+            
+
+            // Upload de la nouvelle image
+            
+        }
+
+        // Mise à jour des données en table "posts"
+    }
+    else {
+        $error = 'Le titre, le contenu et la catégorie sont obligatoires';
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,7 +131,7 @@ $error = null;
                             <div class="mb-3">
                                 <label for="category" class="form-label">Catégorie</label>
                                 <select class="form-select" id="category" name="category">
-                                    <option>Choisir une catégorie</option>
+                                    <option value="">Choisir une catégorie</option>
 
                                     <!-- Liste des catégories -->
                                     <?php foreach($categories as $categorie): ?>
