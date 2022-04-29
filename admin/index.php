@@ -29,7 +29,7 @@ $articles = $query->fetchAll();
 
         <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        
+
         <!-- Placer sa feuille de style CSS en dernière position -->
         <link rel="stylesheet" href="../css/style.css">
     </head>
@@ -82,6 +82,12 @@ $articles = $query->fetchAll();
                         L'article à bien été ajouté !
                     </div>
                 <?php endif; ?>
+
+                <?php if(isset($_GET['successDelete'])): ?>
+                    <div class="alert alert-success mb-4">
+                        L'article à bien été supprimé !
+                    </div>
+				<?php endif; ?>
 
                 <table class="table table-striped table-hover">
                     <thead>
