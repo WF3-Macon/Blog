@@ -24,6 +24,7 @@ $article = $query->fetch();
 $title = $article['title'];
 $content = $article['content'];
 $category = $article['category_id'];
+$picture = $article['cover'];
 $error = null;
 
 /**
@@ -42,13 +43,32 @@ if (!empty($_POST)) {
         // Est-ce que je reçois une image ?
         if (!empty($_FILES['cover']) && $_FILES['cover']['error'] === 0) {
             // Suppression de l'ancienne image
-            
+            unlink("../images/upload/{$picture}");
 
             // Upload de la nouvelle image
+            require_once 'inc/functions.php';
+            $upload = uploadPicture($_FILES['cover'], '../images/upload', 1);
             
+            // Si je reçois une erreur lors de l'upload, je retourne l'erreur
+            // à ma variable "$error" afin de l'afficher au dessus du formulaire
+            if (!empty($upload['error'])) {
+                $error = $upload['error'];
+            }
+            else {
+                $picture = $upload['filename'];
+            }
         }
 
-        // Mise à jour des données en table "posts"
+        // Mise à jour en BDD seulement si la variable "$error" est égale à NULL
+        if ($error === null) {
+            $query = $db->prepare('UPDATE posts SET title = :title, content = :content, cover = :cover, category_id = :category WHERE id = :id');
+            $query->bindValue(':title', $title);
+            $query->bindValue(':content', $content);
+            $query->bindValue(':cover', $picture);
+            $query->bindValue(':category', $category, PDO::PARAM_INT);
+            $query->bindValue(':id', $id, PDO::PARAM_INT);
+            $query->execute();
+        }
     }
     else {
         $error = 'Le titre, le contenu et la catégorie sont obligatoires';
@@ -150,7 +170,7 @@ if (!empty($_POST)) {
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <img src="../images/upload/<?php echo $article['cover']; ?>" alt="Mon image" class="img-fluid rounded">
+                            <img src="../images/upload/<?php echo $picture; ?>" alt="Mon image" class="img-fluid rounded">
                         </div>
                     </div>
                     <button class="btn btn-primary">Enregistrer les modifications</button>
