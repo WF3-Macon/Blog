@@ -26,6 +26,7 @@ $content = $article['content'];
 $category = $article['category_id'];
 $picture = $article['cover'];
 $error = null;
+$success = false;
 
 /**
  * Si la superglobale $_POST n'est pas vide, c'est que le formulaire
@@ -68,6 +69,8 @@ if (!empty($_POST)) {
             $query->bindValue(':category', $category, PDO::PARAM_INT);
             $query->bindValue(':id', $id, PDO::PARAM_INT);
             $query->execute();
+
+            $success = 'L\'article à bien été modifié';
         }
     }
     else {
@@ -131,6 +134,13 @@ if (!empty($_POST)) {
             <div class="container">
                 <form method="post" enctype="multipart/form-data" class="w-50 mx-auto">
                     
+                    <!-- Affichage d'unmessage de succès si nécessaire -->
+                    <?php if($success): ?>
+                        <div class="alert alert-success">
+                            <?php echo $success; ?>
+                        </div>
+                    <?php endif; ?>    
+
                     <!-- Affichage d'une erreur formulaire si nécessaire -->
                     <?php if($error !== null): ?>
                         <div class="alert alert-danger">
