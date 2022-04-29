@@ -10,16 +10,21 @@ $query = $db->query('SELECT * FROM categories ORDER BY name');
 $categories = $query->fetchAll();
 
 /**
- * Déclaration de variables à NULL
- * Elles serviront à remplir le formulaire des données soumises
- * par l'utilisateur
+ * Sélectionne l'article en BDD selon l'ID reçue via l'URL
  */
-$title = null;
-$content = null;
-$category = null;
+$id = htmlspecialchars(strip_tags($_GET['id']));
+
+$query = $db->prepare('SELECT id, title, content, cover, category_id FROM posts WHERE id = :id');
+$query->bindValue(':id', $id, PDO::PARAM_INT);
+$query->execute();
+
+$article = $query->fetch();
+// dump($article);
+
+$title = $article['title'];
+$content = $article['content'];
+$category = $article['category_id'];
 $error = null;
-
-
 
 ?>
 <!DOCTYPE html>
@@ -116,7 +121,7 @@ $error = null;
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <img src="../images/upload/01.jpg" alt="Mon image" class="img-fluid rounded">
+                            <img src="../images/upload/<?php echo $article['cover']; ?>" alt="Mon image" class="img-fluid rounded">
                         </div>
                     </div>
                     <button class="btn btn-primary">Enregistrer les modifications</button>
