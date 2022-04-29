@@ -19,6 +19,8 @@ $content = null;
 $category = null;
 $error = null;
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

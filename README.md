@@ -15,3 +15,9 @@ Installer les dépendances avec Composer :
 ```bash
 composer install
 ```
+
+## Base de données
+
+Importer la base de données en utilisant le fichier SQL `blog.sql` situé dans le dossier `database`.
+
+Lancer l'enregistrement des fixtures en lançant depuis le navigateur le fichier `fixtures.php`.
