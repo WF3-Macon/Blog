@@ -32,6 +32,7 @@ $db->query('SET FOREIGN_KEY_CHECKS = 1');
 /**
  * Insertion des données dans la table "categories"
  */
+
 for ($i = 0; $i < 10; $i++) {
     $query = $db->prepare('INSERT INTO categories (name) VALUES (:name)');
     $query->bindValue(':name', $faker->colorName);

@@ -50,7 +50,8 @@ if (!empty($_POST)) {
         if (empty($upload['error'])) {
             $fileName = $upload['filename'];
 
-            $query = $db->prepare('INSERT INTO posts (user_id, category_id, title, content, cover, created_at) VALUES (1, :category_id, :title, :content, :cover, NOW())');
+            $query = $db->prepare('INSERT INTO posts (user_id, category_id, title, content, cover, created_at) VALUES (:user_id, :category_id, :title, :content, :cover, NOW())');
+            $query->bindValue(':user_id', $_SESSION['user']['id'], PDO::PARAM_INT);
             $query->bindValue(':category_id', $category, PDO::PARAM_INT);
             $query->bindValue(':title', $title);
             $query->bindValue(':content', $content);
