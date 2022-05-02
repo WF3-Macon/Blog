@@ -4,6 +4,9 @@
  * Supprime un article
  */
 
+// Vérifier si l'accès est autorisé
+require_once 'checkAdmin.php';
+
 // Connexion à la base de données
 require_once '../connexion.php';
 

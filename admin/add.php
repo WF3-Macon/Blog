@@ -1,5 +1,8 @@
 <?php
 
+// Vérifier si l'accès est autorisé
+require_once 'checkAdmin.php';
+
 require_once '../connexion.php';
 require_once '../vendor/autoload.php';
 

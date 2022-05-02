@@ -1,5 +1,8 @@
 <?php
 
+// Ouverture de la session
+session_start();
+
 // Connexion à la BDD
 require_once 'connexion.php';
 
@@ -60,7 +63,21 @@ $articles = $query->fetchAll();
                                 <li><a href="#" title="Categories" class="text-secondary text-decoration-none">Categories</a></li>
                                 <li><a href="#" title="Styles" class="text-secondary text-decoration-none">Styles</a></li>
                                 <li><a href="#" title="About" class="text-secondary text-decoration-none">About</a></li>
-                                <li><a href="#" title="Contact" class="text-secondary text-decoration-none">Contact</a></li>
+                                
+                                <?php if(isset($_SESSION['user'])): ?>
+                                    <!-- Lien de deconnexion -->
+                                    <li><a href="logout.php" title="Déconnexion" class="text-danger text-decoration-none">Se déconnecter</a></li>
+                                <?php else: ?>
+                                    <!-- Lien de connexion -->
+                                    <li><a href="login.php" title="Connexion" class="text-warning text-decoration-none">Se connecter</a></li>
+                                <?php endif; ?>
+
+                                <!-- Affiche un lien vers l'administration seulement si le rôle est "ROLE_ADMIN" -->
+                                <?php if(isset($_SESSION['user']) && $_SESSION['user']['role'] === 'ROLE_ADMIN'): ?>
+                                    <li>
+                                        <a href="admin/index.php" title="Administration" class="text-danger text-decoration-none">Administration</a>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
                         </nav>
                     </div>
@@ -95,6 +112,15 @@ $articles = $query->fetchAll();
 
         <main class="py-5">
             <div class="container">
+
+                <!-- Message de bienvenue à l'utilisateur connecté -->
+                <?php if(isset($_SESSION['user'])): ?>
+                    <div class="alert alert-success">
+                        Bonjour <?php echo $_SESSION['user']['firstname']; ?> <?php echo $_SESSION['user']['lastname']; ?> !
+                        <a href="logout.php" title="Déconnexion">Se déconnecter</a>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Les articles de mon blog -->
                 <div class="row">
                     
