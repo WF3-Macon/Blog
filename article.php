@@ -47,41 +47,8 @@ if (!$article) {
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <header class="bg-dark py-4">
-            <div class="container">
-
-                <!-- Ligne -->
-                <div class="row">
-                    <!-- Titre du site -->
-                    <div class="col-6 col-lg-12 text-start text-lg-center">
-                        <a href="index.php" title="Philo..." class="text-white text-decoration-none h1 logo">
-                            Philosophy.
-                        </a>
-                    </div>
-
-                    <!-- Menu burger -->
-                    <div class="col-6 d-block d-lg-none text-end">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list text-white" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                    </div>
-
-                    <!-- Navigation -->
-                    <div class="col-12 d-none d-lg-block">
-                        <nav>
-                            <ul class="d-flex align-items-center justify-content-center gap-5 pt-3 m-0">
-                                <li><a href="index.html" title="Home" class="text-secondary text-decoration-none">Home</a></li>
-                                <li><a href="#" title="Categories" class="text-secondary text-decoration-none">Categories</a></li>
-                                <li><a href="#" title="Styles" class="text-secondary text-decoration-none">Styles</a></li>
-                                <li><a href="#" title="About" class="text-secondary text-decoration-none">About</a></li>
-                                <li><a href="#" title="Contact" class="text-secondary text-decoration-none">Contact</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="gradient"></div>
+        <!-- Inclusion du header de la page -->
+        <?php require_once 'layouts/header.php'; ?>
 
         <main class="pt-5">
             <div class="container">
@@ -166,10 +133,7 @@ if (!$article) {
             </div>
         </main>
 
-        <footer class="bg-dark py-4">
-            <div class="container">
-                <p class="m-0 text-white">&copy; Copyright Philosophy 2022</p>
-            </div>
-        </footer>
+        <!-- Inclusion du footer de la page -->
+        <?php require_once 'layouts/footer.php'; ?>
     </body>
 </html>
